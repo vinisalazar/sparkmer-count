@@ -1,6 +1,6 @@
 FROM spark-base:2.3.1
 
-COPY start-master.sh /
+COPY env/start-master.sh /
 
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080
