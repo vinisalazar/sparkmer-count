@@ -1,6 +1,6 @@
-FROM spark-base:2.3.1
+FROM spydernaz/spark-base:latest
 
-COPY start-worker.sh /
+COPY spark-submit.sh /
 
 ENV SPARK_WORKER_WEBUI_PORT 8081
 ENV SPARK_WORKER_LOG /spark/logs
