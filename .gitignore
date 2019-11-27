@@ -91,3 +91,10 @@ fabric.properties
 .idea/**/markdown-navigator/
 
 # End of https://www.gitignore.io/api/pycharm
+
+#cache
+**__pycache__
+
+
+#dados e temporários
+**data
