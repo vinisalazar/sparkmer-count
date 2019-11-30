@@ -23,9 +23,9 @@ class FASTAReade():
                 .withColumn("quality", F.lead("row",count=3).over(Windowspec))\
                 .withColumn("+", F.lead("row",count=2).over(Windowspec))\
                 .withColumn("seq", F.lead("row",count=1).over(Windowspec))\
-                .withColumn("sqID", F.lead("row",count=0).over(Windowspec))
+                .withColumn("seqID", F.lead("row",count=0).over(Windowspec))
 
-        parsedDF = oDF.filter(F.col("idx") % 4 == 0).select("sqID", "seq", "+", "quality")
+        parsedDF = oDF.filter(F.col("idx") % 4 == 0).select("seqID", "seq", "+", "quality")
         return parsedDF
 
 if __name__ == "__main__":
