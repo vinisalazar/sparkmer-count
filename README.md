@@ -3,6 +3,6 @@
 Data download
 
 ```shell
-wget https://raw.githubusercontent.com/sib-swiss/sib-tech-blog/gh-pages/data/spark-bioinformatics/swissprot-aug-2017.tsv.gz -P data
+wget https://molb7621.github.io/workshop/_downloads/lamina.bed -P data
 ```
 
