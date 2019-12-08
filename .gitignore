@@ -97,4 +97,5 @@ fabric.properties
 
 
 #dados e temporários
-**data
+data/
+*/.ipynb_checkpoints/
