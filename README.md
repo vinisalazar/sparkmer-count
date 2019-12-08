@@ -1,4 +1,7 @@
 ```shell
+# install dependencies
+$ pip install pyspark psutil
+
 # Set up docker env
 $ docker-compose up -d
 
