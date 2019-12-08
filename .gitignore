@@ -99,3 +99,5 @@ fabric.properties
 #dados e temporários
 data/
 */.ipynb_checkpoints/
+.vscode/
+
