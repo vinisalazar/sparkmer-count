@@ -61,7 +61,6 @@ def seq2kmer(seq_, k):
     value = seq_[0].strip()
     num_kmers = len(value) - k + 1
     kmers_list = [value[n * k : k * (n + 1)] for n in range(0, num_kmers)]
-
     # return len(value)
     return kmers_list
 
@@ -86,7 +85,7 @@ def parser_fasta_id_line(line):
 
 def kmers_list2kmers_freq_dict(kmers_list):
     """
-    Cálcula as frequências absolutas de cda kmer no dataframe
+    Cálcula as frequências absolutas de cada kmer no dataframe
     Retorna:
         Um onjeto map("kmer" -> número de ocorrências ) para cada sequência
     """
@@ -204,14 +203,15 @@ if __name__ == "__main__":
     print("Starting sequence processing.")
     KmerFreqTuple = types.MapType(types.StringType(), types.IntegerType())
     kmers_list2kmers_freq_dict_udf = F.udf(kmers_list2kmers_freq_dict)
-    kmer_profile_df = (
+    kmers_profile_df = (
         fasta_kmers_df.groupby("seqID")
         .agg(F.collect_list("kmers").alias("kmers_list"))
         .withColumn("kmers_freq", kmers_list2kmers_freq_dict_udf("kmers_list"))
     )
 
     print("Your kmer profile df has the following schema:\n")
-    kmer_profile_df.printSchema()
+    kmers_profile_df.printSchema()
+    breakpoint()
 
     # 1.5 Writing kmers profile to disc
     print("Creating kmers profile df.")
@@ -220,8 +220,10 @@ if __name__ == "__main__":
         .reduceByKey(lambda x, y: x + y)
         .toDF(["seqID", "kmers_list"])
     )
+    kmers_profile_df.show()
     print(f"Writing profile to {args.output}")
     kmers_profile_df.toPandas().to_csv(args.output)
+    breakpoint()
 
     delta_ = delta(start_seqs)
 
@@ -262,7 +264,7 @@ if __name__ == "__main__":
     print("Fitting data to Bisecting K Means model")
     model = bkm.fit(features_df)
     clustering_pipeline = Pipeline(stages=[bkm])
-    print("Building grid for cross validation")
+    print("Building grid for cross-validation")
     paramGrid = ParamGridBuilder().addGrid(bkm.k, [2, 5, 10, 20, 50, 70, 100]).build()
     print("Starting cross-validation")
     crossval = CrossValidator(
