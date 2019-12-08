@@ -1,5 +1,5 @@
 ```shell
-# install dependencies
+# Install dependencies
 $ pip install pyspark psutil
 
 # Set up docker env
