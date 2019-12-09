@@ -211,7 +211,8 @@ if __name__ == "__main__":
 
     print("Your kmer profile df has the following schema:\n")
     kmers_profile_df.printSchema()
-    breakpoint()
+    print(f"Writing profile to {args.output}")
+    kmers_profile_df.toPandas().to_csv(args.output)
 
     # 1.5 Writing kmers profile to disc
     print("Creating kmers profile df.")
@@ -221,9 +222,6 @@ if __name__ == "__main__":
         .toDF(["seqID", "kmers_list"])
     )
     kmers_profile_df.show()
-    print(f"Writing profile to {args.output}")
-    kmers_profile_df.toPandas().to_csv(args.output)
-    breakpoint()
 
     delta_ = delta(start_seqs)
 
