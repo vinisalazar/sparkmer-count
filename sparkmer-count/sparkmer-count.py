@@ -60,8 +60,7 @@ def fasta_plain_df():
 def seq2kmer(seq_, k):
     value = seq_[0].strip()
     num_kmers = len(value) - k + 1
-    kmers_list = [value[n * k : k * (n + 1)] for n in range(0, num_kmers)]
-    # return len(value)
+    kmers_list = [value[n:k+n] for n in range(num_kmers)]
     return kmers_list
 
 
